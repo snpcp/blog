@@ -3,14 +3,13 @@
 
     var sidebarClass = function() {
         this.init();
-        for (var key = 0; key < window.eocourse.sidebarConstant.list.length; key++) {
-            var val = window.eocourse.sidebarConstant.list[key];
+        for (var key = 0; key < window.enums.sidebarConstant.list.length; key++) {
+            var val = window.enums.sidebarConstant.list[key];
             val.level = 0;
             this.paint(val, document.getElementById('sidebar_js'));
         }
     };
     try {
-        console.log("a-----5-----");
         var href = decodeURI(window.location.search).split('?target=/')[1].split(/&origin=\//g);
     } catch (e) {
         var href = '';
@@ -22,7 +21,6 @@
                 target: null
             }
             try {
-                console.log("a-----4-----");
                 template.target = decodeURI(window.location.search).split('?target=')[1].split(/&origin=/g)[0];
             } catch (e) {
                 template.target = null;
@@ -38,7 +36,6 @@
             };
             if (template.target) {
                 var http = new XMLHttpRequest();
-                console.log()
                 http.open("GET", window.location.origin + window.location.pathname + template.target + '.md', true);
                 http.send(null);
                 http.onload = function() {
@@ -64,7 +61,6 @@
 
                 }
             } else {
-                console.log("a------3----");
                 window.location.href = window.location.href + '?target=/md/index';
             }
 
@@ -86,11 +82,11 @@
                 }
             }
             if (isCurrent && arg.href) {
-                window.document.title = arg.title + '-eoLinker官方支持手册';
+                window.document.title = arg.title + '-xzh的博客';
             }
             var template = {
                 html: '<li class="common-level-' + arg.level + (isCurrent ? (arg.href ? (' elem-active level' + arg.level) : (' level' + arg.level)) : ' hidden') + '" >' +
-                    '<p level="' + arg.level + '" class="' + (isCurrent ? 'ico_up' : 'ico_down') + '" onclick="eocourse.sidebarClass.click(this)"><a ' + (arg.href ? ('onclick="eocourse.sidebarClass.router(\'' + arg.href + '\'' + (arg.originHref ? (',\'' + arg.originHref + '\'') : '') + ')"') : '') + '>' + (arg.childList ? '<span class="pull-left  ico"></span>' : '<span class="pull-left unchild-span"></span>') + arg.title + '</a></p>' +
+                    '<p level="' + arg.level + '" class="' + (isCurrent ? 'ico_up' : 'ico_down') + '" onclick="enums.sidebarClass.click(this)"><a ' + (arg.href ? ('onclick="enums.sidebarClass.router(\'' + arg.href + '\'' + (arg.originHref ? (',\'' + arg.originHref + '\'') : '') + ')"') : '') + '>' + (arg.childList ? '<span class="pull-left  ico"></span>' : '<span class="pull-left unchild-span"></span>') + arg.title + '</a></p>' +
                     '</li>',
                 elem: null
             }
@@ -120,14 +116,12 @@
         },
         router: function(href, originHref) {
             if (originHref) {
-                console.log("a------1----");
                 window.location.href = window.location.origin + window.location.pathname + '?target=' + href + '&origin=' + originHref;
             } else {
-                console.log("a----2------");
                 window.location.href = window.location.origin + window.location.pathname + '?target=' + href;
             }
 
         }
     }
-    window.eocourse.sidebarClass = new sidebarClass();
+    window.enums.sidebarClass = new sidebarClass();
 })();
